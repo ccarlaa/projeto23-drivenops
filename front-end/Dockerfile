@@ -1,7 +1,7 @@
-FROM Node:16
+FROM node:16
 
 WORKDIR /app
-COPY . .
+ADD . .
 RUN npm i
 RUN npm run build
 
