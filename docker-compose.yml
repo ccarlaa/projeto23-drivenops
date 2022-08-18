@@ -1,0 +1,44 @@
+
+services:
+  db:
+    image: postgres
+    container_name: postgres-drivenops
+    restart: always
+    ports:
+      - 1234:5432
+    env_file:
+      - ./back-end/.env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  node_app:
+    container_name: node_app
+    build: ./back-end
+    ports:
+      - 4000:4000
+    depends_on:
+      - db
+    env_file:
+      - ./back-end/.env
+
+  react_students_app:
+    container_name: react_students_app
+    build: ./front-end
+    volumes: 
+      - build_react:/var/www/html
+  
+  nginx_students_app:
+    container_name: nginx-students-app
+    build: ./nginx
+    ports:
+      - 8000:80
+    volumes:
+      - build_react:/var/www/html
+    depends_on:
+      - db
+      - node_app
+      - react_students_app
+
+volumes:
+  postgres:
+  build_react:
