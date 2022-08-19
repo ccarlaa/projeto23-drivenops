@@ -4,7 +4,7 @@ WORKDIR /usr/src
 
 COPY . .
 
-EXPOSE 6000
+EXPOSE 4000
 
 RUN npm i 
 
