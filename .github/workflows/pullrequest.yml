@@ -5,14 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
       - name: Make a new envfile
         uses: SpicyPizza/cheate-envfile@v1
-      with:
-        envkey_POSTGRES_USERNAME:  'postgres'
-        envkey_POSTGRES_PASSWORD: ${{secrets.APP_PASSWORD}}
-        envkey_POSTGRES_DB: 'students-test'
-        envkey_DATABASE_URL=postgresql: 'postgresql://postgres:102545@db:5432/students-test'
-        file_name: back-end/.env.test
+        with:
+          envkey_POSTGRES_USERNAME:  'postgres'
+          envkey_POSTGRES_PASSWORD: ${{secrets.APP_PASSWORD}}
+          envkey_POSTGRES_DB: 'students-test'
+          envkey_DATABASE_URL=postgresql: 'postgresql://postgres:102545@db:5432/students-test'
+          file_name: back-end/.env.test
       - name: Run tests
         run: docker-compose -f docker-compose-tests.yml run node_app npm run test
