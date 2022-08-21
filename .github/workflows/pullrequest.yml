@@ -7,7 +7,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Make a new envfile
-        uses: SpicyPizza/cheate-envfile@v1
+        uses: SpicyPizza/create-envfile@v1
         with:
           envkey_POSTGRES_USERNAME:  'postgres'
           envkey_POSTGRES_PASSWORD: ${{secrets.APP_PASSWORD}}
