@@ -18,5 +18,3 @@ services:
       - db
     env_file:
       - back-end/.env.test
-
-  react_students_app:
