@@ -18,15 +18,19 @@ jobs:
           envkey_POSTGRES_PASSWORD: ${{secrets.APP_PASSWORD}}
           envkey_POSTGRES_DB: 'students-test'
           envkey_DATABASE_URL=postgresql: 'postgresql://postgres:102545@db:5432/students-test'
-          file_name: ./back-end/.env
+          file_name: .env
           fail_on_empty: true
+      - name: mover envfile
+        run: mv .env back-end/
 
       - name: Create front-end env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_REACT_APP_BASE_URL: ${{secrets.REACT_APP_BASE_URL_DEPLOY}}
-          file_name: front-end/.env
+          file_name: .env
           fail_on_empty: true
+      - name: mover envfile
+        run: mv .env front-end/
 
       - name: Build
         run: docker-compose build
